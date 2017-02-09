@@ -1,0 +1,23 @@
+<h3>Topics</h3>
+
+<div class="new-topic-btn right">
+  <%= link to: topic_path(@conn, :new), class: "waves-effect waves-light btn blue darken-1" do %>
+    <i class="left material-icons">add</i>New Topic</a>
+  <% end %>
+</div>
+
+
+<ul class="collection">
+  <%= for topic <- @topics do %>
+    <li class="collection-item">
+    <%= topic.title %>
+      <%= if @conn.assigns.user != nil && @conn.assigns.user.id == topic.user_id do %>
+        <div class="right" style="display: flex">
+          <%= link "Edit", to: topic_path(@conn, :edit, topic), style: "margin-right: 15px" %>
+          <%= link "Delete", to: topic_path(@conn, :delete, topic), method: :delete,
+          class: "red-text text-lighten-1"%>
+        </div>
+      <% end %>
+    </li>
+  <% end %>
+</ul>
